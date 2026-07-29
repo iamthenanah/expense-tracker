@@ -1,63 +1,72 @@
-💰 Expense Tracker
+# 💰 Expense Tracker
 
 A simple command-line expense tracker built with Python.
 
 This project helps users manage their daily expenses by adding, viewing, deleting, and calculating expenses. The application stores data permanently using JSON file handling.
 
-⸻
+---
 
-✨ Features
+## ✨ Features
 
-* ➕ Add new expenses
-* 🗂️ Choose expense categories
-* 📋 View all expenses
-* 💵 Calculate total expenses
-* 🗑️ Delete expenses
-* 💾 Save expenses automatically using JSON
-* 📂 Load previous expenses when the program starts
-* ⚠️ Handle invalid inputs using exception handling
+- ➕ Add new expenses
+- 🗂️ Choose expense categories
+- 📋 View all expenses
+- 💵 Calculate total expenses
+- 🗑️ Delete expenses
+- 💾 Save data automatically using JSON
+- 📂 Load previous expenses when the program starts
+- ⚠️ Handle invalid inputs with exception handling
 
-⸻
+---
 
-🛠️ Technologies Used
+## 🛠️ Technologies Used
 
-* Python 3
-* JSON
-* File Handling
-* Lists and Dictionaries
-* Functions
-* Exception Handling (try/except)
+- Python 3
+- JSON
+- File Handling
+- Lists and Dictionaries
+- Functions
+- Exception Handling (`try/except`)
 
-⸻
+---
 
-📁 Project Structure
+## 📁 Project Structure
 
+```text
 expense-tracker/
-
+│
 ├── main.py
 ├── README.md
 └── .gitignore
+```
 
-⸻
+---
 
-▶️ How to Run
+## ▶️ How to Run
 
-Clone this repository:
+### 1. Clone the repository
 
+```bash
 git clone https://github.com/iamthenanah/expense-tracker.git
+```
 
-Go to the project folder:
+### 2. Go to the project folder
 
+```bash
 cd expense-tracker
+```
 
-Run the application:
+### 3. Run the application
 
+```bash
 python main.py
+```
 
-⸻
+---
 
-📌 Example
+## 📌 Example
 
+```text
 ==== Expense Tracker ====
 
 1. Add Expense
@@ -66,45 +75,48 @@ python main.py
 4. Delete Expense
 5. Exit
 
+Choose:
+```
+
 Example:
 
+```text
 Expense name: Coffee
-
 Amount: 5
-
 Category: Drinks ☕
+```
 
-⸻
+---
 
-🧠 What I Learned
+## 🧠 What I Learned
 
 While building this project, I practiced:
 
-* Creating and organizing Python functions
-* Working with lists and dictionaries
-* Reading and writing files
-* Using JSON for data storage
-* Handling user input errors
-* Building a complete command-line application
+- Creating and organizing Python functions
+- Working with lists and dictionaries
+- Reading and writing files
+- Using JSON for data storage
+- Handling user input errors
+- Building a complete command-line application
 
-⸻
+---
 
-🚀 Future Improvements
+## 🚀 Future Improvements
 
 Planned features:
 
-* 🔎 Search expenses
-* ✏️ Edit expenses
-* 📊 Expense reports by category
-* 📅 Add expense dates
-* 📈 Data visualization
-* 🎨 Build a graphical interface using Streamlit
+- 🔎 Search expenses
+- ✏️ Edit expenses
+- 📊 Expense reports by category
+- 📅 Add expense dates
+- 📈 Data visualization
+- 🎨 Build a graphical interface using Streamlit
 
-⸻
+---
 
-👩‍💻 Author
+## 👩‍💻 Author
 
-Nana
+**Nana**
 
 Computer Engineering Student
 
