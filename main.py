@@ -10,6 +10,7 @@ categories = {
     '6': 'Bills 🛋️',
     '7': 'Health 🍎',
     '8': 'Other 📦',
+
 }
 
 
@@ -34,8 +35,8 @@ def format_datetime(datetime_string):
 
 
 def add_expense(expenses):
-    item = input('Expense name: ')
-    if not item.strip():
+    item = input('Expense name: ').strip()
+    if not item:
         print('Expense name cannot be empty!')
         return
     try:
@@ -75,9 +76,9 @@ def show_expenses(expenses):
         print('\nNo expenses yet!')
     else:
         print('\nYour expenses:')
-        for expense in expenses:
+        for index, expense in enumerate(expenses, start=1):
             print(
-                f"name: {expense['name']} - amount: ${expense['amount']:.2f} - category: {expense['category']} - time:{format_datetime(expense['datetime'])} ")
+                f"{index}. name: {expense['name']} - amount: ${expense['amount']:.2f} - category: {expense['category']} - time:{format_datetime(expense['datetime'])} ")
 
 
 def total_expense(expenses):
@@ -85,7 +86,6 @@ def total_expense(expenses):
         print('No expenses yet!')
     else:
         total = sum(expense['amount'] for expense in expenses)
-
         print(f'Total expense: ${total:.2f} 💵')
 
 
@@ -94,10 +94,8 @@ def delete_expense(expenses):
         print('No expenses!')
         return
 
-    print('\nChoose expense to delete: ')
-    for index, expense in enumerate(expenses, start=1):
-        print(
-            f"{index}. {expense['name']} - ${expense['amount']:.2f} - {expense['category']}")
+    show_expenses(expenses)
+
     try:
         deleted_item = int(input('Choose expense to delete: '))
     except ValueError:
@@ -133,6 +131,87 @@ def search_expense(expenses):
         print('No matching expense found!')
 
 
+def edit_expense(expenses):
+    show_expenses(expenses)
+
+    try:
+        edited_expense = int(input('Choose your expense to edit: '))
+    except ValueError:
+        print('Invalid number!')
+        return
+
+    if edited_expense < 1 or edited_expense > len(expenses):
+        print('Invalid number!')
+        return
+
+    new_item = input('New item: ').strip()
+    if not new_item:
+        print('Expense name cannot be empty!')
+        return
+
+    try:
+        new_amount = float(input('New amount: '))
+    except ValueError:
+        print('Invalid amount!')
+        return
+    if new_amount <= 0:
+        print('Amount must be greater than zero!')
+        return
+
+    print('\nChoose the new category: ')
+    for key, value in categories.items():
+        print(f'{key}. {value}')
+    new_category = input('Choose category: ')
+    if new_category not in categories:
+        print('Invalid category!')
+        return
+
+    new_datetime = datetime.now().isoformat()
+    selected_expense = expenses[edited_expense - 1]
+
+    selected_expense['name'] = new_item
+    selected_expense['amount'] = new_amount
+    selected_expense['category'] = categories[new_category]
+    selected_expense['datetime'] = new_datetime
+
+    save_expenses(expenses)
+    print('Expense updated successfully!')
+
+
+def filter_by_category(expenses):
+    if not expenses:
+        print('No expenses yet!')
+        return
+
+    print('\nYour categories: ')
+    for key, value in categories.items():
+        print(f'{key}. {value}')
+
+    selected_category = input('\nSelect your category: ')
+
+    if selected_category not in categories:
+        print('Invalid category!')
+        return
+
+    found = False
+    total = 0
+
+    print(f"Expense in {categories[selected_category]}:")
+
+    for expense in expenses:
+        if expense['category'] == categories[selected_category]:
+            print(f"{expense['name']} - ${expense['amount']:.2f}")
+
+            total += expense['amount']
+            found = True
+
+    if not found:
+        print('No expenses in this category!')
+    else:
+        print(
+            f"\nTotal {categories[selected_category]} expenses: ${total:.2f}")
+
+
 expenses = load_expenses()
 updated = False
 
@@ -151,7 +230,9 @@ while True:
     print('3. Total Expense')
     print('4. Delete Expense')
     print('5. Search Expense')
-    print('6. Exit')
+    print('6. Edit Expense')
+    print('7. Filter Your Categories')
+    print('8. Exit')
 
     choice = input('Choose: ')
 
@@ -171,6 +252,12 @@ while True:
         search_expense(expenses)
 
     elif choice == '6':
+        edit_expense(expenses)
+
+    elif choice == '7':
+        filter_by_category(expenses)
+
+    elif choice == '8':
         print('Bye')
         break
     else:
